@@ -20,40 +20,50 @@ import { useSdkContext } from '../../../SdkProvider';
 const styles = {
   dropdown: {
     root: css`
-      font-weight: ${tokens.fontWeightDemiBold};
+      font-weight: ${tokens.fontWeightNormal};
+      font-family: serif;
     `,
     [BLOCKS.PARAGRAPH]: css`
       font-size: ${tokens.fontSizeL};
+      font-family: sans-serif;
     `,
     [BLOCKS.HEADING_1]: css`
-      font-size: 1.625rem;
+      font-size: 6rem;
+      line-height: 144px;
     `,
     [BLOCKS.HEADING_2]: css`
-      font-size: 1.4375rem;
+      font-size: 3.5rem;
+      line-height: 84px;
     `,
     [BLOCKS.HEADING_3]: css`
-      font-size: 1.25rem;
+      font-size: 2.5rem;
+      line-height: 60px;
     `,
     [BLOCKS.HEADING_4]: css`
-      font-size: 1.125rem;
+      font-size: 2rem;
+      line-height: 48px;
     `,
     [BLOCKS.HEADING_5]: css`
-      font-size: 1rem;
+      font-size: 1.5rem;
+      line-height: 36px;
     `,
     [BLOCKS.HEADING_6]: css`
-      font-size: 0.875rem;
+      font-weight: ${tokens.fontWeightDemiBold};
+      font-family: sans-serif;
+      font-size: 1.25rem;
+      line-height: 30px;
     `,
   },
 };
 
 const LABELS = {
-  [BLOCKS.PARAGRAPH]: 'Normal text',
-  [BLOCKS.HEADING_1]: 'Heading 1',
-  [BLOCKS.HEADING_2]: 'Heading 2',
-  [BLOCKS.HEADING_3]: 'Heading 3',
-  [BLOCKS.HEADING_4]: 'Heading 4',
-  [BLOCKS.HEADING_5]: 'Heading 5',
-  [BLOCKS.HEADING_6]: 'Heading 6',
+  [BLOCKS.HEADING_1]: 'Short title',
+  [BLOCKS.HEADING_2]: 'Long title',
+  [BLOCKS.HEADING_3]: 'Section header',
+  [BLOCKS.HEADING_4]: 'Body copy header',
+  [BLOCKS.HEADING_5]: 'Serif column header',
+  [BLOCKS.HEADING_6]: 'Sans Serif column header',
+  [BLOCKS.PARAGRAPH]: 'Body copy',
 };
 
 export interface ToolbarHeadingButtonProps {
