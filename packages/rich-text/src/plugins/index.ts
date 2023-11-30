@@ -3,6 +3,7 @@ import { PlateProps } from '@udecode/plate-common';
 import { createDeserializeDocxPlugin } from '@udecode/plate-serializer-docx';
 
 import { PlatePlugin } from '../internal/types';
+import { createAlignPlugin } from './Align';
 import { createSoftBreakPlugin, createExitBreakPlugin, createResetNodePlugin } from './Break';
 import { createCommandPalettePlugin } from './CommandPalette';
 import { isCommandPromptPluginEnabled } from './CommandPalette/useCommands';
@@ -57,6 +58,7 @@ export const getPlugins = (
   createEmbeddedEntryBlockPlugin(sdk),
   createEmbeddedAssetBlockPlugin(sdk),
   createEmbeddedResourceBlockPlugin(sdk),
+  createAlignPlugin(),
 
   // Inline elements
   createHyperlinkPlugin(sdk),

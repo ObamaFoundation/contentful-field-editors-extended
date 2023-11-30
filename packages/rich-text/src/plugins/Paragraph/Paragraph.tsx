@@ -2,9 +2,10 @@ import * as React from 'react';
 
 import tokens from '@contentful/f36-tokens';
 import { BLOCKS } from '@contentful/rich-text-types';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
-import { RenderElementProps } from '../../internal/types';
+import { Element, RenderElementProps } from '../../internal/types';
+import { useAlignmentStyles } from '../Align';
 
 const styles = {
   [BLOCKS.PARAGRAPH]: css`
@@ -13,9 +14,14 @@ const styles = {
   `,
 };
 
-export function Paragraph(props: RenderElementProps) {
+export function Paragraph(
+  props: RenderElementProps & {
+    element: Element;
+  }
+) {
+  const alignmentStyles = useAlignmentStyles(props.element);
   return (
-    <div {...props.attributes} className={styles[BLOCKS.PARAGRAPH]}>
+    <div {...props.attributes} className={cx(styles[BLOCKS.PARAGRAPH], alignmentStyles)}>
       {props.children}
     </div>
   );
