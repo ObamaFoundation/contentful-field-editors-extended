@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+// import { AlignDropdownMenu } from '@/components/plate-ui/align-dropdown-menu';
+
 import { FieldAppSDK } from '@contentful/app-sdk';
 import { Flex, IconButton, Menu } from '@contentful/f36-components';
 import { MoreHorizontalIcon } from '@contentful/f36-icons';
@@ -7,6 +9,8 @@ import tokens from '@contentful/f36-tokens';
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import { css } from 'emotion';
 
+import { AlignDropdownMenu } from '../@/components/plate-ui/align-dropdown-menu';
+import { ToolbarGroup } from '../@/components/plate-ui/toolbar';
 import { useContentfulEditor } from '../ContentfulEditorProvider';
 import { isNodeTypeSelected } from '../helpers/editor';
 import { isMarkEnabled, isNodeTypeEnabled } from '../helpers/validations';
@@ -132,7 +136,7 @@ const Toolbar = ({ isDisabled }: ToolbarProps) => {
   const shouldShowDropdown = boldItalicUnderlineAvailable && dropdownItemsAvailable;
 
   return (
-    <Flex testId="toolbar" className={styles.toolbar} alignItems="center">
+    <Flex testId="toolbar" className={styles.toolbar} alignItems="center" fullWidth>
       <div className={styles.formattingOptionsWrapper}>
         <ToolbarHeadingButton isDisabled={isDisabled || !canInsertBlocks} />
 
@@ -151,6 +155,11 @@ const Toolbar = ({ isDisabled }: ToolbarProps) => {
         {!boldItalicUnderlineAvailable && isMarkEnabled(sdk.field, MARKS.SUBSCRIPT) && (
           <ToolbarSubscriptButton isDisabled={isDisabled} />
         )}
+
+        <ToolbarGroup noSeparator>
+          <AlignDropdownMenu />
+        </ToolbarGroup>
+
         {!boldItalicUnderlineAvailable && isMarkEnabled(sdk.field, MARKS.CODE) && (
           <ToolbarCodeButton isDisabled={isDisabled} />
         )}
