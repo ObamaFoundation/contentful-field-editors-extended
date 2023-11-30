@@ -50,34 +50,37 @@ const buildHyperlinkEventHandler =
     };
   };
 
-const getNodeOfType = (type: INLINES) => (el: HTMLElement, node: AnyObject) => ({
-  type,
-  children: node.children,
-  data:
-    type === INLINES.HYPERLINK
-      ? {
-          uri: el.getAttribute('href'),
-        }
-      : type === INLINES.RESOURCE_HYPERLINK
-      ? {
-          target: {
-            sys: {
-              urn: el.getAttribute('data-resource-link-urn'),
-              linkType: el.getAttribute('data-resource-link-type'),
-              type: 'ResourceLink',
+const getNodeOfType = (type: INLINES) => (el: HTMLElement, node: AnyObject) => {
+  console.log('getNodeOfType: ');
+  return {
+    type,
+    children: node.children,
+    data:
+      type === INLINES.HYPERLINK
+        ? {
+            uri: el.getAttribute('href'),
+          }
+        : type === INLINES.RESOURCE_HYPERLINK
+        ? {
+            target: {
+              sys: {
+                urn: el.getAttribute('data-resource-link-urn'),
+                linkType: el.getAttribute('data-resource-link-type'),
+                type: 'ResourceLink',
+              },
+            },
+          }
+        : {
+            target: {
+              sys: {
+                id: el.getAttribute('data-link-id'),
+                linkType: el.getAttribute('data-link-type'),
+                type: 'Link',
+              },
             },
           },
-        }
-      : {
-          target: {
-            sys: {
-              id: el.getAttribute('data-link-id'),
-              linkType: el.getAttribute('data-link-type'),
-              type: 'Link',
-            },
-          },
-        },
-});
+  };
+};
 
 export const createHyperlinkPlugin = (sdk: FieldAppSDK): PlatePlugin => {
   const common: Partial<PlatePlugin> = {

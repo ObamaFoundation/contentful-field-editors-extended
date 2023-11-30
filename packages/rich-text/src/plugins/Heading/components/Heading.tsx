@@ -3,7 +3,10 @@ import * as React from 'react';
 import tokens from '@contentful/f36-tokens';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { css, cx } from 'emotion';
+import { Element } from 'internal';
 import * as Slate from 'slate-react';
+
+import { useAlignmentStyles } from '../../Align';
 
 const styles = {
   dropdown: {
@@ -61,9 +64,16 @@ const styles = {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- TODO: explain this disable
 function createHeading(Tag: any, block: BLOCKS) {
-  return function Heading(props: Slate.RenderElementProps) {
+  return function Heading(
+    props: Slate.RenderElementProps & {
+      element: Element;
+    }
+  ) {
+    const alignmentStyles = useAlignmentStyles(props.element);
     return (
-      <Tag {...props.attributes} className={cx(styles.headings.root, styles.headings[block])}>
+      <Tag
+        {...props.attributes}
+        className={cx(styles.headings.root, styles.headings[block], alignmentStyles)}>
         {props.children}
       </Tag>
     );
